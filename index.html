@@ -13,6 +13,24 @@
             font-size: 28px;
             text-align: center;
         }
+        .nav-buttons {
+            text-align: center;
+            margin: 10px auto;
+            width: 90%;
+        }
+        .nav-btn {
+            background-color: #CCCCCC;
+            border: 1px solid #666;
+            padding: 5px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 40px;
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         table {
             border: 2px solid black;
             border-collapse: collapse;
@@ -36,7 +54,7 @@
         a:hover {
             color: red;
         }
-        .folder-btn {
+        .folder-btn, .file-btn {
             background-color: #CCCCCC;
             border: 1px solid #666;
             padding: 3px 10px;
@@ -44,7 +62,7 @@
             color: black;
             font-size: 14px;
         }
-        .folder-btn:hover {
+        .folder-btn:hover, .file-btn:hover {
             background-color: #DDDDDD;
         }
         hr {
@@ -60,51 +78,180 @@
     </style>
 </head>
 <body>
-    <h1>АРХИВ СТАРЫХ ФАЙЛОВ</h1>
+    <div class="nav-buttons">
+        <button class="nav-btn" id="back-btn" onclick="goBack()">⇦</button>
+        <button class="nav-btn" id="forward-btn" onclick="goForward()">⇨</button>
+        <button class="nav-btn" onclick="goHome()">⇧</button>
+    </div>
+    
+    <h1 id="page-title">АРХИВ СТАРЫХ ФАЙЛОВ</h1>
     <hr>
-    <table>
-        <tr>
-            <th>№</th>
-            <th>Название папки</th>
-            <th>Тип</th>
-            <th>Действие</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
-            <td>Папка</td>
-            <td><a href="#" class="folder-btn">Перейти</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">cookie!</td>
-            <td>Папка</td>
-            <td><a href="#" class="folder-btn">Перейти</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">attention DINOSAUR</td>
-            <td>Папка</td>
-            <td><a href="#" class="folder-btn">Перейти</a></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
-            <td>Папка</td>
-            <td><a href="#" class="folder-btn">Перейти</a></td>
-        </tr>
-    </table>
+    
+    <div id="main-content">
+        <table id="content-table">
+            <tr>
+                <th>№</th>
+                <th>Название папки</th>
+                <th>Тип</th>
+                <th>Действие</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
+                <td>Папка</td>
+                <td><a href="#" class="folder-btn" onclick="openFolder('вот б ы запаролить всю эту хрень')">Перейти</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">cookie!</td>
+                <td>Папка</td>
+                <td><a href="#" class="folder-btn" onclick="openFolder('cookie!')">Перейти</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">attention DINOSAUR</td>
+                <td>Папка</td>
+                <td><a href="#" class="folder-btn" onclick="openFolder('attention DINOSAUR')">Перейти</a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
+                <td>Папка</td>
+                <td><a href="#" class="folder-btn" onclick="openFolder('Only for dinosaurs')">Перейти</a></td>
+            </tr>
+        </table>
+    </div>
     
     <script>
-        var links = document.querySelectorAll('.folder-btn');
-        for (var i = 0; i < links.length; i++) {
-            links[i].onclick = function(e) {
-                e.preventDefault();
-                var folderName = this.parentNode.parentNode.children[1].innerText;
-                alert('Переход в папку: ' + folderName.replace('http://z.p7z.ru/folder.png', '').trim());
-                return false;
-            };
+        // История навигации
+        var navigationHistory = [
+            {
+                title: 'АРХИВ СТАРЫХ ФАЙЛОВ',
+                content: `
+                    <tr>
+                        <th>№</th>
+                        <th>Название папки</th>
+                        <th>Тип</th>
+                        <th>Действие</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
+                        <td>Папка</td>
+                        <td><a href="#" class="folder-btn" onclick="openFolder('вот б ы запаролить всю эту хрень')">Перейти</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><img src="http://z.p7z.ru/folder.png" class="fileicon">cookie!</td>
+                        <td>Папка</td>
+                        <td><a href="#" class="folder-btn" onclick="openFolder('cookie!')">Перейти</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><img src="http://z.p7z.ru/folder.png" class="fileicon">attention DINOSAUR</td>
+                        <td>Папка</td>
+                        <td><a href="#" class="folder-btn" onclick="openFolder('attention DINOSAUR')">Перейти</a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
+                        <td>Папка</td>
+                        <td><a href="#" class="folder-btn" onclick="openFolder('Only for dinosaurs')">Перейти</a></td>
+                    </tr>
+                `
+            }
+        ];
+        
+        var currentHistoryIndex = 0;
+        
+        function openFolder(folderName) {
+            event.preventDefault();
+            
+            if (folderName === 'вот б ы запаролить всю эту хрень') {
+                // Добавляем новое состояние в историю
+                navigationHistory.push({
+                    title: 'ПАПКА: вот б ы запаролить всю эту хрень',
+                    content: `
+                        <tr>
+                            <th>№</th>
+                            <th>Имя файла</th>
+                            <th>Тип</th>
+                            <th>Действие</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><img src="http://z.p7z.ru/media.png" class="fileicon">0217 (1).mp4</td>
+                            <td>Видео</td>
+                            <td><a href="#" class="file-btn" onclick="downloadFile('0217 (1).mp4')">Скачать</a></td>
+                        </tr>
+                    `
+                });
+                
+                currentHistoryIndex++;
+                renderPage();
+                updateNavButtons();
+            }
+            
+            return false;
         }
+        
+        function downloadFile(filename) {
+            event.preventDefault();
+            alert('Начато скачивание: ' + filename);
+            return false;
+        }
+        
+        function goBack() {
+            if (currentHistoryIndex > 0) {
+                currentHistoryIndex--;
+                renderPage();
+                updateNavButtons();
+            }
+        }
+        
+        function goForward() {
+            if (currentHistoryIndex < navigationHistory.length - 1) {
+                currentHistoryIndex++;
+                renderPage();
+                updateNavButtons();
+            }
+        }
+        
+        function goHome() {
+            currentHistoryIndex = 0;
+            renderPage();
+            updateNavButtons();
+        }
+        
+        function renderPage() {
+            var currentState = navigationHistory[currentHistoryIndex];
+            document.getElementById('page-title').innerHTML = currentState.title;
+            document.getElementById('content-table').innerHTML = currentState.content;
+        }
+        
+        function updateNavButtons() {
+            var backBtn = document.getElementById('back-btn');
+            var forwardBtn = document.getElementById('forward-btn');
+            
+            // Обновляем кнопку "Назад"
+            if (currentHistoryIndex > 0) {
+                backBtn.disabled = false;
+            } else {
+                backBtn.disabled = true;
+            }
+            
+            // Обновляем кнопку "Вперед"
+            if (currentHistoryIndex < navigationHistory.length - 1) {
+                forwardBtn.disabled = false;
+            } else {
+                forwardBtn.disabled = true;
+            }
+        }
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavButtons();
+        });
     </script>
 </body>
 </html>
