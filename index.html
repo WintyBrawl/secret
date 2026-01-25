@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Архив старых файлов</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 20px;
+            background-color: #F0F0F0;
+        }
+        h1 {
+            color: navy;
+            font-size: 28px;
+            text-align: center;
+        }
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            width: 90%;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th {
+            background-color: #CCCCCC;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        a {
+            color: blue;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: red;
+        }
+        hr {
+            border: 1px solid gray;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <h1>АРХИВ СТАРЫХ ФАЙЛОВ</h1>
+    <hr>
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Имя файла</th>
+            <th>Тип</th>
+            <th>Размер</th>
+            <th>Дата</th>
+            <th>Скачать</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>document_test.doc</td>
+            <td>Документ Word</td>
+            <td>245 КБ</td>
+            <td>15.04.2023</td>
+            <td><a href="#">Скачать</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>data.xls</td>
+            <td>Таблица Excel</td>
+            <td>512 КБ</td>
+            <td>10.03.2023</td>
+            <td><a href="#">Скачать</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>image.jpg</td>
+            <td>Изображение</td>
+            <td>850 КБ</td>
+            <td>05.05.2023</td>
+            <td><a href="#">Скачать</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>archive.zip</td>
+            <td>Архив</td>
+            <td>4.5 МБ</td>
+            <td>12.06.2023</td>
+            <td><a href="#">Скачать</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>audio.mp3</td>
+            <td>Аудио файл</td>
+            <td>3.8 МБ</td>
+            <td>25.09.2023</td>
+            <td><a href="#">Скачать</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>readme.txt</td>
+            <td>Текстовый файл</td>
+            <td>2 КБ</td>
+            <td>01.01.2024</td>
+            <td><a href="#">Скачать</a></td>
+        </tr>
+    </table>
+    
+    <script>
+        var links = document.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            links[i].onclick = function(e) {
+                e.preventDefault();
+                var filename = this.parentNode.parentNode.children[1].innerText;
+                alert('Начато скачивание: ' + filename);
+                return false;
+            };
+        }
+    </script>
+</body>
+</html>
