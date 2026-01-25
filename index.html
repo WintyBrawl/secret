@@ -36,9 +36,26 @@
         a:hover {
             color: red;
         }
+        .folder-btn {
+            background-color: #CCCCCC;
+            border: 1px solid #666;
+            padding: 3px 10px;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+        .folder-btn:hover {
+            background-color: #DDDDDD;
+        }
         hr {
             border: 1px solid gray;
             width: 90%;
+        }
+        .fileicon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -48,69 +65,43 @@
     <table>
         <tr>
             <th>№</th>
-            <th>Имя файла</th>
+            <th>Название папки</th>
             <th>Тип</th>
-            <th>Размер</th>
-            <th>Дата</th>
-            <th>Скачать</th>
+            <th>Действие</th>
         </tr>
         <tr>
             <td>1</td>
-            <td>document_test.doc</td>
-            <td>Документ Word</td>
-            <td>245 КБ</td>
-            <td>15.04.2023</td>
-            <td><a href="#">Скачать</a></td>
+            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
+            <td>Папка</td>
+            <td><a href="#" class="folder-btn">Перейти</a></td>
         </tr>
         <tr>
             <td>2</td>
-            <td>data.xls</td>
-            <td>Таблица Excel</td>
-            <td>512 КБ</td>
-            <td>10.03.2023</td>
-            <td><a href="#">Скачать</a></td>
+            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">cookie!</td>
+            <td>Папка</td>
+            <td><a href="#" class="folder-btn">Перейти</a></td>
         </tr>
         <tr>
             <td>3</td>
-            <td>image.jpg</td>
-            <td>Изображение</td>
-            <td>850 КБ</td>
-            <td>05.05.2023</td>
-            <td><a href="#">Скачать</a></td>
+            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">attention DINOSAUR</td>
+            <td>Папка</td>
+            <td><a href="#" class="folder-btn">Перейти</a></td>
         </tr>
         <tr>
             <td>4</td>
-            <td>archive.zip</td>
-            <td>Архив</td>
-            <td>4.5 МБ</td>
-            <td>12.06.2023</td>
-            <td><a href="#">Скачать</a></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>audio.mp3</td>
-            <td>Аудио файл</td>
-            <td>3.8 МБ</td>
-            <td>25.09.2023</td>
-            <td><a href="#">Скачать</a></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>readme.txt</td>
-            <td>Текстовый файл</td>
-            <td>2 КБ</td>
-            <td>01.01.2024</td>
-            <td><a href="#">Скачать</a></td>
+            <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
+            <td>Папка</td>
+            <td><a href="#" class="folder-btn">Перейти</a></td>
         </tr>
     </table>
     
     <script>
-        var links = document.querySelectorAll('a');
+        var links = document.querySelectorAll('.folder-btn');
         for (var i = 0; i < links.length; i++) {
             links[i].onclick = function(e) {
                 e.preventDefault();
-                var filename = this.parentNode.parentNode.children[1].innerText;
-                alert('Начато скачивание: ' + filename);
+                var folderName = this.parentNode.parentNode.children[1].innerText;
+                alert('Переход в папку: ' + folderName.replace('http://z.p7z.ru/folder.png', '').trim());
                 return false;
             };
         }
