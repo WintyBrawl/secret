@@ -182,7 +182,7 @@
                             <td>1</td>
                             <td><img src="http://z.p7z.ru/media.png" class="fileicon">0217 (1).mp4</td>
                             <td>Видео</td>
-                            <td><a href="#" class="file-btn" onclick="downloadFile('0217 (1).mp4')">Скачать</a></td>
+                            <td><a href="http://z.p7z.ru/0217 (1).mp4" class="file-btn" download>Скачать</a></td>
                         </tr>
                     `
                 });
@@ -192,12 +192,6 @@
                 updateNavButtons();
             }
             
-            return false;
-        }
-        
-        function downloadFile(filename) {
-            event.preventDefault();
-            alert('Начато скачивание: ' + filename);
             return false;
         }
         
