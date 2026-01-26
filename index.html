@@ -115,6 +115,12 @@
             </tr>
             <tr>
                 <td>5</td>
+                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">чічкєн</td>
+                <td>Папка</td>
+                <td><a href="#" class="folder-btn" onclick="return openFolder('чічкєн', 6)">Перейти</a></td>
+            </tr>
+            <tr>
+                <td>6</td>
                 <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
                 <td>Папка</td>
                 <td><a href="#" class="folder-btn" onclick="return openFolder('вот б ы запаролить всю эту хрень', 1)">Перейти</a></td>
@@ -143,6 +149,9 @@
             } else if (folderId === 5) {
                 currentPage = 'folder5';
                 showFolder5();
+            } else if (folderId === 6) {
+                currentPage = 'folder6';
+                showFolder6();
             }
             
             return false;
@@ -355,6 +364,31 @@
             `;
         }
         
+        function showFolder6() {
+            document.getElementById('page-title').innerHTML = 'ПАПКА: чічкєн';
+            
+            document.getElementById('content-table').innerHTML = `
+                <tr>
+                    <th>№</th>
+                    <th>Имя файла</th>
+                    <th>Тип</th>
+                    <th>Действие</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="http://z.p7z.ru/photo.png" class="fileicon">i (18).png</td>
+                    <td>Изображение</td>
+                    <td><a href="http://z.p7z.ru/i (18).png" class="file-btn" download>Скачать</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><img src="http://z.p7z.ru/photo.png" class="fileicon">wdfsesssssssssssssssssssadaw.png</td>
+                    <td>Изображение</td>
+                    <td><a href="http://z.p7z.ru/wdfsesssssssssssssssssssadaw.png" class="file-btn" download>Скачать</a></td>
+                </tr>
+            `;
+        }
+        
         function showFolder3() {
             document.getElementById('page-title').innerHTML = 'ПАПКА: attention DINOSAUR';
             
@@ -423,9 +457,15 @@
                     <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
                     <td>Папка</td>
                     <td><a href="#" class="folder-btn" onclick="return openFolder('Only for dinosaurs', 4)">Перейти</a></td>
-            </tr>
+                </tr>
                 <tr>
                     <td>5</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">чічкєн</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('чічкєн', 6)">Перейти</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
                     <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
                     <td>Папка</td>
                     <td><a href="#" class="folder-btn" onclick="return openFolder('вот б ы запаролить всю эту хрень', 1)">Перейти</a></td>
