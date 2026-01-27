@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Архив старых файлов</title>
+    <title>Архив</title>
     <style>
         body {
             font-family: "Times New Roman", serif;
@@ -71,64 +71,142 @@
             vertical-align: middle;
             margin-right: 5px;
         }
+        .login-container {
+            text-align: center;
+            margin: 50px auto;
+            width: 300px;
+            background-color: white;
+            border: 2px solid black;
+            padding: 20px;
+        }
+        .login-input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #666;
+            font-size: 16px;
+        }
+        .login-btn {
+            background-color: #CCCCCC;
+            border: 1px solid #666;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .login-btn:hover {
+            background-color: #DDDDDD;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <div class="nav-buttons">
-        <button class="nav-btn" onclick="goHome()">⇧</button>
+    <div id="login-screen" style="display: block;">
+        <div class="login-container">
+            <h2>ВХОД</h2>
+            <hr>
+            <input type="text" id="username" class="login-input" placeholder="Логин">
+            <input type="password" id="password" class="login-input" placeholder="Пароль">
+            <button class="login-btn" onclick="login()">Войти</button>
+            <div id="error-message" class="error-message"></div>
+        </div>
     </div>
     
-    <h1 id="page-title">АРХИВ СТАРЫХ ФАЙЛОВ</h1>
-    <hr>
-    
-    <div id="main-content">
-        <table id="content-table">
-            <tr>
-                <th>№</th>
-                <th>Название папки</th>
-                <th>Тип</th>
-                <th>Действие</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">attention DINOSAUR</td>
-                <td>Папка</td>
-                <td><a href="#" class="folder-btn" onclick="return openFolder('attention DINOSAUR', 3)">Перейти</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">cookie!</td>
-                <td>Папка</td>
-                <td><a href="#" class="folder-btn" onclick="return openFolder('cookie!', 2)">Перейти</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">memasiki</td>
-                <td>Папка</td>
-                <td><a href="#" class="folder-btn" onclick="return openFolder('memasiki', 5)">Перейти</a></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
-                <td>Папка</td>
-                <td><a href="#" class="folder-btn" onclick="return openFolder('Only for dinosaurs', 4)">Перейти</a></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">чічкєн</td>
-                <td>Папка</td>
-                <td><a href="#" class="folder-btn" onclick="return openFolder('чічкєн', 6)">Перейти</a></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
-                <td>Папка</td>
-                <td><a href="#" class="folder-btn" onclick="return openFolder('вот б ы запаролить всю эту хрень', 1)">Перейти</a></td>
-            </tr>
-        </table>
+    <div id="main-screen" style="display: none;">
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="goHome()">⇧</button>
+            <button class="nav-btn" onclick="logout()" style="margin-left: 20px; width: auto; font-size: 14px;">Выйти</button>
+        </div>
+        
+        <h1 id="page-title">АРХИВ</h1>
+        <hr>
+        
+        <div id="main-content">
+            <table id="content-table">
+                <tr>
+                    <th>№</th>
+                    <th>Название папки</th>
+                    <th>Тип</th>
+                    <th>Действие</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">attention DINOSAUR</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('attention DINOSAUR', 3)">Перейти</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">cookie!</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('cookie!', 2)">Перейти</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">memasiki</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('memasiki', 5)">Перейти</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">Only for dinosaurs</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('Only for dinosaurs', 4)">Перейти</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">чічкєн</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('чічкєн', 6)">Перейти</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><img src="http://z.p7z.ru/folder.png" class="fileicon">вот б ы запаролить всю эту хрень</td>
+                    <td>Папка</td>
+                    <td><a href="#" class="folder-btn" onclick="return openFolder('вот б ы запаролить всю эту хрень', 1)">Перейти</a></td>
+                </tr>
+            </table>
+        </div>
     </div>
     
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var saved = localStorage.getItem('archiveLogin');
+            if (saved === 'true') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-screen').style.display = 'block';
+            }
+        });
+        
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var errorMsg = document.getElementById('error-message');
+            
+            if ((username === "ogurec" && password === "shaketrigger123") ||
+                (username === "feedthechicken" && password === "aboba009")) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-screen').style.display = 'block';
+                localStorage.setItem('archiveLogin', 'true');
+            } else {
+                errorMsg.textContent = "Неверный логин или пароль";
+                document.getElementById('password').value = '';
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('archiveLogin');
+            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('main-screen').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('error-message').textContent = '';
+        }
+        
         var currentPage = 'main';
         
         function openFolder(folderName, folderId) {
@@ -425,7 +503,7 @@
         
         function goHome() {
             currentPage = 'main';
-            document.getElementById('page-title').innerHTML = 'АРХИВ СТАРЫХ ФАЙЛОВ';
+            document.getElementById('page-title').innerHTML = 'АРХИВ';
             
             document.getElementById('content-table').innerHTML = `
                 <tr>
